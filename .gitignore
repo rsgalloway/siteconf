@@ -11,4 +11,4 @@ tmp/
 .venv*/
 venv*/
 .vscode/
-pyseq.egg-info/
+*.egg-info/
