@@ -31,22 +31,22 @@ Python libraries are resolved in the following order, from most specific to most
 
 Some defaults have been set for convenience that can be overridden with [environment variables](#environment-variables).
 
-For example, by default the deployment root is called "tool", the production environment is called "prod" and the development environment is called "dev", so by default on linux `sys.path` would include:
+For example, by default the deployment root is called "tools", the production environment is called "prod" and the development environment is called "dev", so by default on linux `sys.path` would include:
 
 ```bash
-/mnt/tool/prod/lib/linux/python3
-/mnt/tool/prod/lib/linux/python
-/mnt/tool/prod/lib/python3
-/mnt/tool/prod/lib/python
+/mnt/tools/prod/lib/linux/python3
+/mnt/tools/prod/lib/linux/python
+/mnt/tools/prod/lib/python3
+/mnt/tools/prod/lib/python
 ```
 
 or on Windows:
 
 ```shell
-Z:/tool/prod/lib/win64/python3
-Z:/tool/prod/lib/win64/python
-Z:/tool/prod/lib/python3
-Z:/tool/prod/lib/python
+Z:/tools/prod/lib/win64/python3
+Z:/tools/prod/lib/win64/python
+Z:/tools/prod/lib/python3
+Z:/tools/prod/lib/python
 ```
 
 ## Environment Variables
@@ -55,7 +55,7 @@ The following environment variables can be used to customize Python search paths
 
 | Variable      | Description |
 |---------------|-------------|
-| $DEPLOY_ROOT  | override the default deployment path "tool" |
+| $DEPLOY_ROOT  | override the default deployment path "tools" |
 | $DEV          | add development environment to the search path |
 | $DEV_ENV      | override the default development environment name "dev" |
 | $DRIVE_LETTER | override the default Windows drive letter name "Z" |
@@ -78,14 +78,14 @@ $ export DEV=1
 Now, the dev environment takes precedence over prod, but the prod environment is still in sys.path, just lower down in priority, so anything in dev will override anything else:
 
 ```bash
-/mnt/tool/dev/lib/linux/python3
-/mnt/tool/dev/lib/linux/python
-/mnt/tool/dev/lib/python3
-/mnt/tool/dev/lib/python
-/mnt/tool/prod/lib/linux/python3
-/mnt/tool/prod/lib/linux/python
-/mnt/tool/prod/lib/python3
-/mnt/tool/prod/lib/python
+/mnt/tools/dev/lib/linux/python3
+/mnt/tools/dev/lib/linux/python
+/mnt/tools/dev/lib/python3
+/mnt/tools/dev/lib/python
+/mnt/tools/prod/lib/linux/python3
+/mnt/tools/prod/lib/linux/python
+/mnt/tools/prod/lib/python3
+/mnt/tools/prod/lib/python
 ```
 
 To add a custom "test" environment to the Python search path (supercedes all others):

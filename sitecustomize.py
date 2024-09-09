@@ -59,7 +59,7 @@ DEV = os.getenv("DEV") in ("1", "true", "True")
 SEP = "/"
 
 # filesystem path where tools are deployed not including the mount point prefix
-# e.g. if the tools are deployed to /mnt/tool, DEPLOY_ROOT should be "tool"
+# e.g. if libs are deployed to /mnt/tool, DEPLOY_ROOT should be "tool"
 DEPLOY_ROOT = os.getenv("DEPLOY_ROOT", "tool").lstrip("/\\")
 
 # define the root path
