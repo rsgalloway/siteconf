@@ -33,7 +33,7 @@ Custom environments can be useful for testing a developer's test environment.
 """
 
 __author__ = "ryan@rsgalloway.com"
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 import os
 import sys
@@ -84,6 +84,16 @@ PYTHON_MAJOR_VERSION = os.getenv("PYVERSION", sys.version_info[0])
 PYTHON_DIR = os.getenv("PYTHON_DIR", f"python{PYTHON_MAJOR_VERSION}")
 
 
+def add_path(path):
+    """
+    Adds a path to sys.path if it is not already present.
+
+    :param path: a path to add to sys.path
+    """
+    if path not in sys.path:
+        sys.path.append(path)
+
+
 def add_root(root):
     """
     Adds path for a given `root` in order of platform and Python version:
@@ -105,16 +115,16 @@ def add_root(root):
     """
 
     # platform and python version specific (highest priority)
-    sys.path.append(SEP.join([root, PYTHON_PLATFORM_DIR, PYTHON_DIR]))
+    add_path(SEP.join([root, PYTHON_PLATFORM_DIR, PYTHON_DIR]))
 
     # platform specific, python version agnostic
-    sys.path.append(SEP.join([root, PYTHON_PLATFORM_DIR, "python"]))
+    add_path(SEP.join([root, PYTHON_PLATFORM_DIR, "python"]))
 
     # platform agnostic, python version specific
-    sys.path.append(SEP.join([root, PYTHON_DIR]))
+    add_path(SEP.join([root, PYTHON_DIR]))
 
     # platform and python version agnostic (lowest priority)
-    sys.path.append(SEP.join([root, "python"]))
+    add_path(SEP.join([root, "python"]))
 
 
 # add custom lib root (overrides dev and production lib)
