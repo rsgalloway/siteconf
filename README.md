@@ -1,26 +1,31 @@
-sitecustomize
-=============
+siteconf
+========
 
-Customizes `sys.path` based on platform and Python version when Python loads
-for site-specific configuration.
-
-https://docs.python.org/3/library/site.html#module-sitecustomize
+Customizes `sys.path` based on platform and Python version when Python loads for site-specific configuration.
 
 This `sitecustomize.py` module plays a crucial role in VFX pipelines by allowing customizations to be applied to the Python environment at startup.
 
+https://docs.python.org/3/library/site.html#module-sitecustomize
+
 ## Installation
 
-To install the `sitecustomize` module, follow these steps:
+The easiest way to install is with pip:
 
 ```bash
-$ git clone https://github.com/rsgalloway/sitecustomize
-$ cd sitecustomize
+$ pip install siteconf
+```
+
+Alternatively, to install from the repo follow these steps:
+
+```bash
+$ git clone https://github.com/rsgalloway/siteconf
+$ cd siteconf
 $ python setup.py install
 ```
 
 ## Usage
 
-`sitecustomize.py` provides a convenient way to customize the Python environment by executing code before the interpreter begins executing the main script.
+The `sitecustomize.py` module provides a convenient way to customize the Python environment by executing code before the interpreter begins executing the main script.
 
 Python libraries are resolved in the following order, from most specific to most agnostic:
 
