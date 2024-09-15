@@ -121,7 +121,3 @@ A few notes about deployment of Python modules and packages:
 - platform specific libs should be deployed to `lib/$OS`
 - Python version agnostic libs should be deployed to `python`
 - Python version specific libs should be deployed to `python2`, `python3`, `python3.11`, etc.
-
-## Contributing
-
-If you have suggestions, bug reports, or would like to contribute to the `sitecustomize` module, please feel free to open an issue or submit a pull request on the [GitHub repository](https://github.com/rsgalloway/sitecustomize).
