@@ -30,13 +30,16 @@
 #
 
 from setuptools import setup
-from sitecustomize import __version__
 
 from os import path
+import sys
 
-this_directory = path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, "README.md")) as f:
+here = path.abspath(path.dirname(__file__))
+with open(path.join(here, "README.md")) as f:
     long_description = f.read()
+
+sys.path.insert(0, here)
+from sitecustomize import __version__
 
 setup(
     name="siteconf",
