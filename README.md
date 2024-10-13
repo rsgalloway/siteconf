@@ -48,10 +48,10 @@ For example, by default the deployment root is called "tools", the production en
 or on Windows:
 
 ```shell
-Z:/tools/prod/lib/win64/python3
-Z:/tools/prod/lib/win64/python
-Z:/tools/prod/lib/python3
-Z:/tools/prod/lib/python
+X:/tools/prod/lib/win32/python3
+X:/tools/prod/lib/win32/python
+X:/tools/prod/lib/python3
+X:/tools/prod/lib/python
 ```
 
 ## Environment Variables
