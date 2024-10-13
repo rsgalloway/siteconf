@@ -38,12 +38,9 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, "README.md")) as f:
     long_description = f.read()
 
-sys.path.insert(0, here)
-from sitecustomize import __version__
-
 setup(
     name="siteconf",
-    version=__version__,
+    version="0.1.3",
     description="Configures sys.path to include hierarchical Python paths",
     long_description=long_description,
     long_description_content_type="text/markdown",
