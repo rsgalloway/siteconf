@@ -29,8 +29,8 @@ The `sitecustomize.py` module provides a convenient way to customize the Python 
 
 Python libraries are resolved in the following order, from most specific to most agnostic:
 
-    $ROOT/$ENV/lib/$OS/python[$PYVERSION]
-    $ROOT/$ENV/lib/$OS/python
+    $ROOT/$ENV/lib/$PLATFORM/python[$PYVERSION]
+    $ROOT/$ENV/lib/$PLATFORM/python
     $ROOT/$ENV/lib/python[$PYVERSION]
     $ROOT/$ENV/lib/python
 
@@ -65,7 +65,7 @@ The following environment variables can be used to customize Python search paths
 | $DEV_ENV      | override the default development environment name "dev" |
 | $DRIVE_LETTER | override the default Windows drive letter name "Z" |
 | $ENV          | add a custom environment to the search path, e.g. "test" |
-| $OS           | override the platform name (win64, linux, osx) |
+| $PLATFORM     | override the platform name (win32, linux, osx) |
 | $PROD_ENV     | override the default production environment name "prod" |
 | $PYVERSION    | Python version (e.g. 2, 3 or 3.11) |
 | $ROOT         | Python module deployment path including mount point |
@@ -118,6 +118,6 @@ $ ENV=test DEPLOY_ROOT=path/to/tools PYVERSION=3.11 python sitecustomize.py
 A few notes about deployment of Python modules and packages:
 
 - platform agnostic libs should be deployed to `lib`
-- platform specific libs should be deployed to `lib/$OS`
+- platform specific libs should be deployed to `lib/$PLATFORM`
 - Python version agnostic libs should be deployed to `python`
 - Python version specific libs should be deployed to `python2`, `python3`, `python3.11`, etc.

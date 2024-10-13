@@ -41,14 +41,14 @@ Installation:
 
 Python libraries are loaded in the following order of priority:
 
-    $ROOT/$ENV/lib/$OS/python[$PYVERSION]
-    $ROOT/$ENV/lib/$OS/python
+    $ROOT/$ENV/lib/$PLATFORM/python[$PYVERSION]
+    $ROOT/$ENV/lib/$PLATFORM/python
     $ROOT/$ENV/lib/python[$PYVERSION]
     $ROOT/$ENV/lib/python
 
 where $ROOT is the deployment root, $ENV is the environment name (prod, dev or
-a custom env), $OS is the platform (win64, linux, osx) and $PYVERSION is the Python
-major version.
+a custom env), $PLATFORM is the platform (win64, linux, osx) and $PYVERSION is
+the Python major version.
 
 To add development versions of Python libs (overrides prod):
 
@@ -97,7 +97,7 @@ if ISWINDOWS:
         ROOT = os.getenv("ROOT", f"//{DEPLOY_ROOT}")
     else:
         ROOT = os.getenv("ROOT", f"{DRIVE_LETTER}:/{DEPLOY_ROOT}")
-    PYTHON_PLATFORM_DIR = "win64"
+    PYTHON_PLATFORM_DIR = "win32"
 elif ISLINUX:
     ROOT = os.getenv("ROOT", f"/mnt/{DEPLOY_ROOT}")
     PYTHON_PLATFORM_DIR = "linux"
@@ -108,7 +108,7 @@ else:
     print("Unsupported platform: %s" % sys.platform)
 
 # set python directory targets
-PYTHON_PLATFORM_DIR = os.getenv("OS", PYTHON_PLATFORM_DIR)
+PYTHON_PLATFORM_DIR = os.getenv("PLATFORM", PYTHON_PLATFORM_DIR)
 PYTHON_MAJOR_VERSION = os.getenv("PYVERSION", sys.version_info[0])
 PYTHON_DIR = os.getenv("PYTHON_DIR", f"python{PYTHON_MAJOR_VERSION}")
 
@@ -127,8 +127,8 @@ def add_root(root):
     """
     Adds path for a given `root` in order of platform and Python version:
 
-        root/$OS/python[$PYVERSION]
-        root/$OS/python
+        root/$PLATFORM/python[$PYVERSION]
+        root/$PLATFORM/python
         root/python[$PYVERSION]
         root/python
 
