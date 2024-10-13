@@ -29,10 +29,10 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 
-from setuptools import setup
-
-from os import path
 import sys
+from os import path
+
+from setuptools import setup
 
 here = path.abspath(path.dirname(__file__))
 with open(path.join(here, "README.md")) as f:
@@ -44,7 +44,7 @@ from sitecustomize import __version__
 setup(
     name="siteconf",
     version=__version__,
-    description="Configures sys.path to include hierarchical Python libs",
+    description="Configures sys.path to include hierarchical Python paths",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Ryan Galloway",

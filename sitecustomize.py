@@ -65,8 +65,8 @@ __author__ = "ryan@rsgalloway.com"
 __version__ = "0.1.1"
 
 import os
-import sys
 import re
+import sys
 
 # define some globals
 ISMAC = sys.platform == "darwin"
