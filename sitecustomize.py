@@ -66,6 +66,7 @@ __version__ = "0.1.1"
 
 import os
 import sys
+import re
 
 # define some globals
 ISMAC = sys.platform == "darwin"
@@ -119,6 +120,7 @@ def add_path(path):
 
     :param path: a path to add to sys.path
     """
+    path = re.sub(r"[\\/]+", SEP, path)
     if path not in sys.path:
         sys.path.append(path)
 
