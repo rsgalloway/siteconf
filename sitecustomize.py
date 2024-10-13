@@ -73,7 +73,7 @@ ISLINUX = sys.platform in ("linux", "linux2")
 ISWINDOWS = sys.platform in ("win32", "win64")
 
 # define windows specific variables
-DRIVE_LETTER = os.getenv("DRIVE_LETTER", "Z")
+DRIVE_LETTER = os.getenv("DRIVE_LETTER", "X")
 USE_UNC = os.getenv("USE_UNC") in ("1", "true", "True")
 
 # define environment names
