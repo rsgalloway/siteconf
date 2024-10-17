@@ -62,7 +62,7 @@ Custom environments can be useful for testing a developer's test environment.
 """
 
 __author__ = "ryan@rsgalloway.com"
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 import os
 import re

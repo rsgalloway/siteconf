@@ -39,14 +39,14 @@ with open(path.join(here, "README.md")) as f:
 
 setup(
     name="siteconf",
-    version="0.1.4",
+    version="0.1.5",
     description="Configures sys.path to include hierarchical Python paths",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Ryan Galloway",
     author_email="ryan@rsgalloway.com",
     py_modules=["sitecustomize"],
-    install_requires=open("requirements.txt").readlines(),
+    install_requires=["envstack>=0.2.1"],
     url="http://github.com/rsgalloway/siteconf",
     zip_safe=False,
 )
