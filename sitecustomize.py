@@ -62,7 +62,7 @@ Custom environments can be useful for testing a developer's test environment.
 """
 
 __author__ = "ryan@rsgalloway.com"
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 import os
 import re
@@ -90,7 +90,7 @@ SEP = "/"
 
 # filesystem path where tools are deployed not including the mount point prefix
 # e.g. if libs are deployed to /mnt/tool, DEPLOY_ROOT should be "tool"
-DEPLOY_ROOT = os.getenv("DEPLOY_ROOT", "tool").lstrip("/\\")
+DEPLOY_ROOT = os.getenv("DEPLOY_ROOT", "tools").lstrip("/\\")
 
 # define the root path
 if ISWINDOWS:

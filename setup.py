@@ -29,7 +29,6 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 
-import sys
 from os import path
 
 from setuptools import setup
@@ -40,13 +39,14 @@ with open(path.join(here, "README.md")) as f:
 
 setup(
     name="siteconf",
-    version="0.1.3",
+    version="0.1.4",
     description="Configures sys.path to include hierarchical Python paths",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Ryan Galloway",
     author_email="ryan@rsgalloway.com",
     py_modules=["sitecustomize"],
+    install_requires=open("requirements.txt").readlines(),
     url="http://github.com/rsgalloway/siteconf",
     zip_safe=False,
 )

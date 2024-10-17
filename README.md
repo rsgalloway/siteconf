@@ -7,6 +7,8 @@ This `sitecustomize.py` module plays a crucial role in VFX pipelines by allowing
 
 https://docs.python.org/3/library/site.html#module-sitecustomize
 
+Siteconf works best combined with [envstack](https://github.com/rsgalloway/envstack).
+
 ## Installation
 
 The easiest way to install is with pip:
@@ -60,7 +62,6 @@ The following environment variables can be used to customize Python search paths
 
 | Variable      | Description |
 |---------------|-------------|
-| $DEPLOY_ROOT  | override the default deployment path "tools" |
 | $DEV          | add development environment to the search path |
 | $DEV_ENV      | override the default development environment name "dev" |
 | $DRIVE_LETTER | override the default Windows drive letter name "Z" |
