@@ -62,7 +62,7 @@ Custom environments can be useful for testing a developer's test environment.
 """
 
 __author__ = "ryan@rsgalloway.com"
-__version__ = "0.1.5"
+__version__ = "0.1.6"
 
 import os
 import re
@@ -113,14 +113,38 @@ PYTHON_PLATFORM_DIR = os.getenv("PLATFORM", PYTHON_PLATFORM_DIR)
 PYTHON_MAJOR_VERSION = os.getenv("PYVERSION", sys.version_info[0])
 PYTHON_DIR = os.getenv("PYTHON_DIR", f"python{PYTHON_MAJOR_VERSION}")
 
+# envstack default env stack file directory variable
+DEFAULT_ENV_VAR = "DEFAULT_ENV_DIR"
+
+
+def sanitize_path(path):
+    """Returns a sanitized path.
+
+    :param path: a filesystem path.
+    :return: a sanitized path.
+    """
+    return re.sub(r"[\\/]+", SEP, path)
+
+
+def add_env(key, path):
+    """
+    Adds a path to os.environ if it is not already present.
+
+    :param key: a key to add to os.environ.
+    :param path: a path to add to sys.path.
+    """
+    path = sanitize_path(path)
+    if key not in os.environ:
+        os.environ[key] = path
+
 
 def add_path(path):
     """
     Adds a path to sys.path if it is not already present.
 
-    :param path: a path to add to sys.path
+    :param path: a path to add to sys.path.
     """
-    path = re.sub(r"[\\/]+", SEP, path)
+    path = sanitize_path(path)
     if path not in sys.path:
         sys.path.append(path)
 
@@ -137,12 +161,12 @@ def add_root(root):
     For example, on windows with python 3.11, the paths would be, in order
     of priority:
 
-        root/win64/python3 -- highest priority (os and python version specific)
-        root/win64/python
+        root/win32/python3 -- highest priority (os and python version specific)
+        root/win32/python
         root/python3
         root/python -- lowest priority (os and python version agnostic)
 
-    :param root: a root path to add to sys.path
+    :param root: a root path to add to sys.path.
     """
 
     # platform and python version specific (highest priority)
@@ -158,20 +182,20 @@ def add_root(root):
     add_path(SEP.join([root, "python"]))
 
 
-# add custom lib root (overrides dev and production lib)
+# add custom lib root and env dir (precedes dev and production lib)
 if CUSTOM_ENV and CUSTOM_ENV != PROD_ENV:
-    cust_root = SEP.join([ROOT, CUSTOM_ENV, "lib"])
-    add_root(cust_root)
+    add_root(SEP.join([ROOT, CUSTOM_ENV, "lib"]))
+    add_env(DEFAULT_ENV_VAR, SEP.join([ROOT, CUSTOM_ENV, "env"]))
 
-# add sandbox lib root (overrides production lib)
+# add sandbox lib root and env dir (precedes production lib)
 if DEV and DEV_ENV != PROD_ENV:
-    dev_root = SEP.join([ROOT, DEV_ENV, "lib"])
-    add_root(dev_root)
+    add_root(SEP.join([ROOT, DEV_ENV, "lib"]))
+    add_env(DEFAULT_ENV_VAR, SEP.join([ROOT, DEV_ENV, "env"]))
 
-# add production lib root
+# add production lib root and env dir
 if PROD_ENV:
-    prod_root = SEP.join([ROOT, PROD_ENV, "lib"])
-    add_root(prod_root)
+    add_root(SEP.join([ROOT, PROD_ENV, "lib"]))
+    add_env(DEFAULT_ENV_VAR, SEP.join([ROOT, PROD_ENV, "env"]))
 
 
 if __name__ == "__main__":

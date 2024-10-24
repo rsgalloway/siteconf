@@ -60,17 +60,18 @@ X:/tools/prod/lib/python
 
 The following environment variables can be used to customize Python search paths:
 
-| Variable      | Description |
-|---------------|-------------|
-| $DEV          | add development environment to the search path |
-| $DEV_ENV      | override the default development environment name "dev" |
-| $DRIVE_LETTER | override the default Windows drive letter name "Z" |
-| $ENV          | add a custom environment to the search path, e.g. "test" |
-| $PLATFORM     | override the platform name (win32, linux, osx) |
-| $PROD_ENV     | override the default production environment name "prod" |
-| $PYVERSION    | Python version (e.g. 2, 3 or 3.11) |
-| $ROOT         | Python module deployment path including mount point |
-| $USE_UNC      | use UNC paths on Windows |
+| Variable         | Description |
+|------------------|-------------|
+| $DEFAULT_ENV_DIR | envstack default env directory |
+| $DEV             | add development environment to the search path |
+| $DEV_ENV         | override the default development environment name "dev" |
+| $DRIVE_LETTER    | override the default Windows drive letter name "Z" |
+| $ENV             | add a custom environment to the search path, e.g. "test" |
+| $PLATFORM        | override the platform name (win32, linux, osx) |
+| $PROD_ENV        | override the default production environment name "prod" |
+| $PYVERSION       | Python version (e.g. 2, 3 or 3.11) |
+| $ROOT            | Python module deployment path including mount point |
+| $USE_UNC         | use UNC paths on Windows |
 
 
 ## Development Environment
