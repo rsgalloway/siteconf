@@ -7,7 +7,7 @@ This `sitecustomize.py` module plays a crucial role in VFX pipelines by allowing
 
 https://docs.python.org/3/library/site.html#module-sitecustomize
 
-Siteconf works best combined with [envstack](https://github.com/rsgalloway/envstack).
+> **Note:** Siteconf works best combined with [envstack](https://github.com/rsgalloway/envstack).
 
 ## Installation
 
@@ -104,15 +104,15 @@ Custom environments can be useful for testing a developer's test environment.
 To get an idea how environment variables can be set to customize the Python search path here is an example that includes a custom env "test" and Python version 3.11 on linux:
 
 ```bash
-$ ENV=test DEPLOY_ROOT=path/to/tools PYVERSION=3.11 python sitecustomize.py 
-/mnt/path/to/tools/test/lib/linux/python3.11
-/mnt/path/to/tools/test/lib/linux/python
-/mnt/path/to/tools/test/lib/python3.11
-/mnt/path/to/tools/test/lib/python
-/mnt/path/to/tools/prod/lib/linux/python3.11
-/mnt/path/to/tools/prod/lib/linux/python
-/mnt/path/to/tools/prod/lib/python3.11
-/mnt/path/to/tools/prod/lib/python
+$ ENV=test DEPLOY_DIR=deploy PYVERSION=3.11 python sitecustomize.py 
+/mnt/deploy/test/lib/linux/python3.11
+/mnt/deploy/test/lib/linux/python
+/mnt/deploy/test/lib/python3.11
+/mnt/deploy/test/lib/python
+/mnt/deploy/prod/lib/linux/python3.11
+/mnt/deploy/prod/lib/linux/python
+/mnt/deploy/prod/lib/python3.11
+/mnt/deploy/prod/lib/python
 ```
 
 ## Deployment

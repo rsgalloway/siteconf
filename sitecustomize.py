@@ -62,7 +62,7 @@ Custom environments can be useful for testing a developer's test environment.
 """
 
 __author__ = "ryan@rsgalloway.com"
-__version__ = "0.1.6"
+__version__ = "0.1.7"
 
 import os
 import re
@@ -88,22 +88,25 @@ DEV = os.getenv("DEV") in ("1", "true", "True")
 # always use forward slashes in paths (platform agnostic)
 SEP = "/"
 
-# filesystem path where tools are deployed not including the mount point prefix
-# e.g. if libs are deployed to /mnt/tool, DEPLOY_ROOT should be "tool"
-DEPLOY_ROOT = os.getenv("DEPLOY_ROOT", "tools").lstrip("/\\")
+# envstack default file directory variable
+DEFAULT_ENV_VAR = "DEFAULT_ENV_DIR"
+
+# directory where files are deployed (not including the mount point)
+# e.g. if libs are deployed to /mnt/tool, DEPLOY_DIR should be "tools"
+DEPLOY_DIR = os.getenv("DEPLOY_DIR", "tools").lstrip("/\\")
 
 # define the root path
 if ISWINDOWS:
     if USE_UNC:
-        ROOT = os.getenv("ROOT", f"//{DEPLOY_ROOT}")
+        ROOT = os.getenv("ROOT", f"//{DEPLOY_DIR}")
     else:
-        ROOT = os.getenv("ROOT", f"{DRIVE_LETTER}:/{DEPLOY_ROOT}")
+        ROOT = os.getenv("ROOT", f"{DRIVE_LETTER}:/{DEPLOY_DIR}")
     PYTHON_PLATFORM_DIR = "win32"
 elif ISLINUX:
-    ROOT = os.getenv("ROOT", f"/mnt/{DEPLOY_ROOT}")
+    ROOT = os.getenv("ROOT", f"/mnt/{DEPLOY_DIR}")
     PYTHON_PLATFORM_DIR = "linux"
 elif ISMAC:
-    ROOT = os.getenv("ROOT", f"/Volumes/{DEPLOY_ROOT}")
+    ROOT = os.getenv("ROOT", f"/Volumes/{DEPLOY_DIR}")
     PYTHON_PLATFORM_DIR = "osx"
 else:
     print("Unsupported platform: %s" % sys.platform)
@@ -112,9 +115,6 @@ else:
 PYTHON_PLATFORM_DIR = os.getenv("PLATFORM", PYTHON_PLATFORM_DIR)
 PYTHON_MAJOR_VERSION = os.getenv("PYVERSION", sys.version_info[0])
 PYTHON_DIR = os.getenv("PYTHON_DIR", f"python{PYTHON_MAJOR_VERSION}")
-
-# envstack default env stack file directory variable
-DEFAULT_ENV_VAR = "DEFAULT_ENV_DIR"
 
 
 def sanitize_path(path):
