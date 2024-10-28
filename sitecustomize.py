@@ -62,20 +62,18 @@ Custom environments can be useful for testing a developer's test environment.
 """
 
 __author__ = "ryan@rsgalloway.com"
-__version__ = "0.1.7"
+__version__ = "0.2.0"
 
 import os
 import re
 import sys
+import platform
 
-# define some globals
-ISMAC = sys.platform == "darwin"
-ISLINUX = sys.platform in ("linux", "linux2")
-ISWINDOWS = sys.platform in ("win32", "win64")
+# users homedir
+HOME = os.getenv("HOME")
 
-# define windows specific variables
-DRIVE_LETTER = os.getenv("DRIVE_LETTER", "X")
-USE_UNC = os.getenv("USE_UNC") in ("1", "true", "True")
+# define the platform (wuindows, linux, darwin)
+PLATFORM = platform.system().lower()
 
 # define environment names
 CUSTOM_ENV = os.getenv("ENV")
@@ -88,31 +86,25 @@ DEV = os.getenv("DEV") in ("1", "true", "True")
 # always use forward slashes in paths (platform agnostic)
 SEP = "/"
 
+# default ROOT directory
+ROOT = {
+    "darwin": f"{HOME}/Library/Application Support/siteconf",
+    "linux": f"{HOME}/.local/siteconf",
+    "windows": "C:\\ProgramData\\siteconf",
+}.get(PLATFORM)
+
+# default python platform directory
+PLATFORM_DIR = {
+    "darwin": "osx",
+    "linux": "linux",
+    "windows": "win32",
+}.get(PLATFORM)
+
 # envstack default file directory variable
 DEFAULT_ENV_VAR = "DEFAULT_ENV_DIR"
 
-# directory where files are deployed (not including the mount point)
-# e.g. if libs are deployed to /mnt/tool, DEPLOY_DIR should be "tools"
-DEPLOY_DIR = os.getenv("DEPLOY_DIR", "tools").lstrip("/\\")
-
-# define the root path
-if ISWINDOWS:
-    if USE_UNC:
-        ROOT = os.getenv("ROOT", f"//{DEPLOY_DIR}")
-    else:
-        ROOT = os.getenv("ROOT", f"{DRIVE_LETTER}:/{DEPLOY_DIR}")
-    PYTHON_PLATFORM_DIR = "win32"
-elif ISLINUX:
-    ROOT = os.getenv("ROOT", f"/mnt/{DEPLOY_DIR}")
-    PYTHON_PLATFORM_DIR = "linux"
-elif ISMAC:
-    ROOT = os.getenv("ROOT", f"/Volumes/{DEPLOY_DIR}")
-    PYTHON_PLATFORM_DIR = "osx"
-else:
-    print("Unsupported platform: %s" % sys.platform)
-
 # set python directory targets
-PYTHON_PLATFORM_DIR = os.getenv("PLATFORM", PYTHON_PLATFORM_DIR)
+PLATFORM_DIR = os.getenv("PLATFORM", PLATFORM_DIR)
 PYTHON_MAJOR_VERSION = os.getenv("PYVERSION", sys.version_info[0])
 PYTHON_DIR = os.getenv("PYTHON_DIR", f"python{PYTHON_MAJOR_VERSION}")
 
@@ -170,10 +162,10 @@ def add_root(root):
     """
 
     # platform and python version specific (highest priority)
-    add_path(SEP.join([root, PYTHON_PLATFORM_DIR, PYTHON_DIR]))
+    add_path(SEP.join([root, PLATFORM_DIR, PYTHON_DIR]))
 
     # platform specific, python version agnostic
-    add_path(SEP.join([root, PYTHON_PLATFORM_DIR, "python"]))
+    add_path(SEP.join([root, PLATFORM_DIR, "python"]))
 
     # platform agnostic, python version specific
     add_path(SEP.join([root, PYTHON_DIR]))

@@ -7,8 +7,6 @@ This `sitecustomize.py` module plays a crucial role in VFX pipelines by allowing
 
 https://docs.python.org/3/library/site.html#module-sitecustomize
 
-> **Note:** Siteconf works best combined with [envstack](https://github.com/rsgalloway/envstack).
-
 ## Installation
 
 The easiest way to install is with pip:
@@ -38,7 +36,8 @@ Python libraries are resolved in the following order, from most specific to most
 
 Some defaults have been set for convenience that can be overridden with [environment variables](#environment-variables).
 
-For example, by default the deployment root is called "tools", the production environment is called "prod" and the development environment is called "dev", so by default on linux `sys.path` would include:
+For example, if `$ROOT` is `/mnt/tools` and the production environment is `prod`,
+then by default on linux `sys.path` would include:
 
 ```bash
 /mnt/tools/prod/lib/linux/python3
@@ -47,7 +46,7 @@ For example, by default the deployment root is called "tools", the production en
 /mnt/tools/prod/lib/python
 ```
 
-or on Windows:
+or on Windows if `$ROOT` is `X:/tools`:
 
 ```shell
 X:/tools/prod/lib/win32/python3
@@ -62,16 +61,14 @@ The following environment variables can be used to customize Python search paths
 
 | Variable         | Description |
 |------------------|-------------|
-| $DEFAULT_ENV_DIR | envstack default env directory |
+| $DEFAULT_ENV_DIR | envstack default .env file directory |
 | $DEV             | add development environment to the search path |
 | $DEV_ENV         | override the default development environment name "dev" |
-| $DRIVE_LETTER    | override the default Windows drive letter name "Z" |
 | $ENV             | add a custom environment to the search path, e.g. "test" |
 | $PLATFORM        | override the platform name (win32, linux, osx) |
 | $PROD_ENV        | override the default production environment name "prod" |
 | $PYVERSION       | Python version (e.g. 2, 3 or 3.11) |
 | $ROOT            | Python module deployment path including mount point |
-| $USE_UNC         | use UNC paths on Windows |
 
 
 ## Development Environment
@@ -104,7 +101,7 @@ Custom environments can be useful for testing a developer's test environment.
 To get an idea how environment variables can be set to customize the Python search path here is an example that includes a custom env "test" and Python version 3.11 on linux:
 
 ```bash
-$ ENV=test DEPLOY_DIR=deploy PYVERSION=3.11 python sitecustomize.py 
+$ ENV=test ROOT=/mnt/deploy PYVERSION=3.11 python sitecustomize.py 
 /mnt/deploy/test/lib/linux/python3.11
 /mnt/deploy/test/lib/linux/python
 /mnt/deploy/test/lib/python3.11

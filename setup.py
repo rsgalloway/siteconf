@@ -39,7 +39,7 @@ with open(path.join(here, "README.md")) as f:
 
 setup(
     name="siteconf",
-    version="0.1.7",
+    version="0.2.0",
     description="Configures sys.path to include hierarchical Python paths",
     long_description=long_description,
     long_description_content_type="text/markdown",
