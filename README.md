@@ -101,14 +101,14 @@ Custom environments can be useful for testing a developer's test environment.
 To get an idea how environment variables can be set to customize the Python search path here is an example that includes a custom env "test" and Python version 3.11 on linux:
 
 ```bash
-$ ENV=test ROOT=/mnt/deploy PYVERSION=3.11 python sitecustomize.py 
-/mnt/deploy/test/lib/linux/python3.11
+$ ENV=test ROOT=/mnt/deploy PYVERSION=3.12 python -m sitecustomize.py 
+/mnt/deploy/test/lib/linux/python3.12
 /mnt/deploy/test/lib/linux/python
-/mnt/deploy/test/lib/python3.11
+/mnt/deploy/test/lib/python3.12
 /mnt/deploy/test/lib/python
-/mnt/deploy/prod/lib/linux/python3.11
+/mnt/deploy/prod/lib/linux/python3.12
 /mnt/deploy/prod/lib/linux/python
-/mnt/deploy/prod/lib/python3.11
+/mnt/deploy/prod/lib/python3.12
 /mnt/deploy/prod/lib/python
 ```
 
