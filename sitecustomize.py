@@ -59,10 +59,18 @@ To add a custom versions of Python libs (overrides dev and prod):
     $ export ENV="test"
 
 Custom environments can be useful for testing a developer's test environment.
+
+NOTE: This script is often used in conjusnction with envstack, a tool for
+managing environment variables.
+
+    $ pip install envstack
+
+The envstack default environment directory variable is `DEFAULT_ENV_DIR` and
+will be added to os.environ if it is not already present.
 """
 
 __author__ = "ryan@rsgalloway.com"
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 import os
 import re
@@ -86,25 +94,27 @@ DEV = os.getenv("DEV") in ("1", "true", "True")
 # always use forward slashes in paths (platform agnostic)
 SEP = "/"
 
-# default ROOT directory
-ROOT = {
+# envstack default .env file directory variable
+DEFAULT_ENV_DIR_VAR = "DEFAULT_ENV_DIR"
+
+# look for $ROOT and $DEPLOY_ROOT
+# (these env vars are often managed by envstack .env files)
+DEFAULT_ROOT = {
     "darwin": f"{HOME}/Library/Application Support/siteconf",
     "linux": f"{HOME}/.local/siteconf",
     "windows": "C:\\ProgramData\\siteconf",
 }.get(PLATFORM)
+ROOT = os.getenv("ROOT", os.getenv("DEPLOY_ROOT", DEFAULT_ROOT))
 
-# default python platform directory
-PLATFORM_DIR = {
+# look for $PLATFORM_DIR
+DEFAULT_PLATFORM_DIR = {
     "darwin": "osx",
     "linux": "linux",
     "windows": "win32",
 }.get(PLATFORM)
-
-# envstack default file directory variable
-DEFAULT_ENV_VAR = "DEFAULT_ENV_DIR"
+PLATFORM_DIR = os.getenv("PLATFORM", DEFAULT_PLATFORM_DIR)
 
 # set python directory targets
-PLATFORM_DIR = os.getenv("PLATFORM", PLATFORM_DIR)
 PYTHON_MAJOR_VERSION = os.getenv("PYVERSION", sys.version_info[0])
 PYTHON_DIR = os.getenv("PYTHON_DIR", f"python{PYTHON_MAJOR_VERSION}")
 
@@ -158,6 +168,14 @@ def add_root(root):
         root/python3
         root/python -- lowest priority (os and python version agnostic)
 
+    How to check site.path values:
+
+        $ ROOT=/var/tmp python -m sitecustomize
+        /var/tmp/prod/lib/linux/python3
+        /var/tmp/prod/lib/linux/python
+        /var/tmp/prod/lib/python3
+        /var/tmp/prod/lib/python
+
     :param root: a root path to add to sys.path.
     """
 
@@ -177,17 +195,17 @@ def add_root(root):
 # add custom lib root and env dir (precedes dev and production lib)
 if CUSTOM_ENV and CUSTOM_ENV != PROD_ENV:
     add_root(SEP.join([ROOT, CUSTOM_ENV, "lib"]))
-    add_env(DEFAULT_ENV_VAR, SEP.join([ROOT, CUSTOM_ENV, "env"]))
+    add_env(DEFAULT_ENV_DIR_VAR, SEP.join([ROOT, CUSTOM_ENV, "env"]))
 
 # add sandbox lib root and env dir (precedes production lib)
 if DEV and DEV_ENV != PROD_ENV:
     add_root(SEP.join([ROOT, DEV_ENV, "lib"]))
-    add_env(DEFAULT_ENV_VAR, SEP.join([ROOT, DEV_ENV, "env"]))
+    add_env(DEFAULT_ENV_DIR_VAR, SEP.join([ROOT, DEV_ENV, "env"]))
 
 # add production lib root and env dir
 if PROD_ENV:
     add_root(SEP.join([ROOT, PROD_ENV, "lib"]))
-    add_env(DEFAULT_ENV_VAR, SEP.join([ROOT, PROD_ENV, "env"]))
+    add_env(DEFAULT_ENV_DIR_VAR, SEP.join([ROOT, PROD_ENV, "env"]))
 
 
 if __name__ == "__main__":
