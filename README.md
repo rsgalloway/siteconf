@@ -32,6 +32,8 @@ Alternate installation using [distman](https://github.com/rsgalloway/distman):
 $ distman [-d]
 ```
 
+distman will deploy the dist targets defined in the `dist.json` file.
+
 ## Usage
 
 The `sitecustomize.py` module provides a convenient way to customize the Python environment by executing code before the interpreter begins executing the main script.

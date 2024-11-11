@@ -1,19 +1,19 @@
 {
     "author": "ryan@rsg.io",
     "targets": {
-        "whichpy-bin": {
+        "bin-whichpy": {
             "source": "bin/whichpy",
             "destination": "{DEPLOY_ROOT}/bin/whichpy"
         },
-        "whichpy-bat": {
+        "bat-whichpy": {
             "source": "bin/whichpy.bat",
             "destination": "{DEPLOY_ROOT}/bin/whichpy.bat"
         },
-        "whichpy-lib": {
+        "lib-whichpy": {
             "source": "lib/whichpy.py",
             "destination": "{DEPLOY_ROOT}/lib/python/whichpy.py"
         },
-        "sitecustomize": {
+        "lib-sitecustomize": {
             "source": "lib/sitecustomize.py",
             "destination": "{DEPLOY_ROOT}/lib/python/sitecustomize.py"
         }

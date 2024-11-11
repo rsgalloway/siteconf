@@ -10,6 +10,9 @@ import os
 import re
 import sys
 
+__prog__ = "whichpy"
+__version__ = "0.1.0"
+
 
 def whichpy(module_name):
     """Returns the path to the module or package."""
