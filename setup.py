@@ -31,7 +31,7 @@
 
 from os import path
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 here = path.abspath(path.dirname(__file__))
 with open(path.join(here, "README.md")) as f:
@@ -39,13 +39,19 @@ with open(path.join(here, "README.md")) as f:
 
 setup(
     name="siteconf",
-    version="0.2.1",
+    version="0.3.0",
     description="Configures sys.path to include hierarchical Python paths",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Ryan Galloway",
     author_email="ryan@rsgalloway.com",
-    py_modules=["sitecustomize"],
     url="http://github.com/rsgalloway/siteconf",
+    package_dir={"": "lib"},
+    packages=find_packages("lib"),
+    entry_points={
+        "console_scripts": [
+            "whichpy=whichpy:main",
+        ],
+    },
     zip_safe=False,
 )
