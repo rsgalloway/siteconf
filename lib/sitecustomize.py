@@ -100,9 +100,9 @@ DEFAULT_ENV_DIR_VAR = "DEFAULT_ENV_DIR"
 # look for $ROOT and $DEPLOY_ROOT (managed by envstack)
 # default root is $HOME/.local/envstack
 DEFAULT_ROOT = {
-    "darwin": f"{HOME}/Library/Application Support/envstack",
-    "linux": f"{HOME}/.local/envstack",
-    "windows": "C:\\ProgramData\\envstack",
+    "darwin": f"{HOME}/Library/Application Support/pipe",
+    "linux": f"{HOME}/.local/pipe",
+    "windows": "C:\\ProgramData\\pipe",
 }.get(PLATFORM)
 ROOT = os.getenv("ROOT", os.getenv("DEPLOY_ROOT", DEFAULT_ROOT))
 

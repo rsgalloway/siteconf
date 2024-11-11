@@ -45,23 +45,23 @@ Python libraries are resolved in the following order, from most specific to most
 
 Some defaults have been set for convenience that can be overridden with [environment variables](#environment-variables).
 
-For example, if `$ROOT` is `/mnt/tools` and the production environment is `prod`,
+For example, if `$ROOT` is `/mnt/pipe` and the production environment is `prod`,
 then by default on linux `sys.path` would include:
 
 ```bash
-/mnt/tools/prod/lib/linux/python3
-/mnt/tools/prod/lib/linux/python
-/mnt/tools/prod/lib/python3
-/mnt/tools/prod/lib/python
+/mnt/pipe/prod/lib/linux/python3
+/mnt/pipe/prod/lib/linux/python
+/mnt/pipe/prod/lib/python3
+/mnt/pipe/prod/lib/python
 ```
 
-or on Windows if `$ROOT` is `X:/tools`:
+or on Windows if `$ROOT` is `X:/pipe`:
 
 ```shell
-X:/tools/prod/lib/win32/python3
-X:/tools/prod/lib/win32/python
-X:/tools/prod/lib/python3
-X:/tools/prod/lib/python
+X:/pipe/prod/lib/win32/python3
+X:/pipe/prod/lib/win32/python
+X:/pipe/prod/lib/python3
+X:/pipe/prod/lib/python
 ```
 
 ### whichpy
@@ -71,7 +71,7 @@ that tells you the location of Python modules and packages:
 
 ```bash
 $ whichpy envstack
-/path/to/the/envstack/package
+/mnt/pipe/prod/lib/linux/python/envstack
 ```
 
 This can be useful when Python modules and packages are contextual and can live
@@ -104,14 +104,14 @@ $ export DEV=1
 Now, the dev environment takes precedence over prod, but the prod environment is still in sys.path, just lower down in priority, so anything in dev will override anything else:
 
 ```bash
-/mnt/tools/dev/lib/linux/python3
-/mnt/tools/dev/lib/linux/python
-/mnt/tools/dev/lib/python3
-/mnt/tools/dev/lib/python
-/mnt/tools/prod/lib/linux/python3
-/mnt/tools/prod/lib/linux/python
-/mnt/tools/prod/lib/python3
-/mnt/tools/prod/lib/python
+/mnt/pipe/dev/lib/linux/python3
+/mnt/pipe/dev/lib/linux/python
+/mnt/pipe/dev/lib/python3
+/mnt/pipe/dev/lib/python
+/mnt/pipe/prod/lib/linux/python3
+/mnt/pipe/prod/lib/linux/python
+/mnt/pipe/prod/lib/python3
+/mnt/pipe/prod/lib/python
 ```
 
 To add a custom "test" environment to the Python search path (supercedes all others):

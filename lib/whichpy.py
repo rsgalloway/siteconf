@@ -6,22 +6,33 @@ is located.
 """
 
 import importlib.util
+import os
+import re
 import sys
 
 
 def whichpy(module_name):
-    """Print the path to the module."""
+    """Returns the path to the module or package."""
     spec = importlib.util.find_spec(module_name)
     if spec and spec.origin:
-        print(spec.origin)
+        origin = spec.origin
+        if re.search(r"__init__\.(py|pyc|pyd)$", origin):
+            origin = os.path.dirname(origin)
+        return origin
     else:
         print(f"Module '{module_name}' not found", file=sys.stderr)
+
+    return
 
 
 def run():
     """Run the whichpy command."""
     module_name = sys.argv[1]
-    whichpy(module_name)
+    path = whichpy(module_name)
+    if path:
+        print(path)
+    else:
+        print(f"Module '{module_name}' not found", file=sys.stderr)
     return 0
 
 
