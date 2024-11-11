@@ -5,6 +5,10 @@
             "source": "bin/whichpy",
             "destination": "{DEPLOY_ROOT}/bin/whichpy"
         },
+        "whichpy-bat": {
+            "source": "bin/whichpy.bat",
+            "destination": "{DEPLOY_ROOT}/bin/whichpy.bat"
+        },
         "whichpy-lib": {
             "source": "lib/whichpy.py",
             "destination": "{DEPLOY_ROOT}/lib/python/whichpy.py"
