@@ -70,12 +70,12 @@ will be added to os.environ if it is not already present.
 """
 
 __author__ = "ryan@rsgalloway.com"
-__version__ = "0.2.1"
+__version__ = "0.3.0"
 
 import os
+import platform
 import re
 import sys
-import platform
 
 # users homedir
 HOME = os.getenv("HOME")
@@ -97,12 +97,12 @@ SEP = "/"
 # envstack default .env file directory variable
 DEFAULT_ENV_DIR_VAR = "DEFAULT_ENV_DIR"
 
-# look for $ROOT and $DEPLOY_ROOT
-# (these env vars are often managed by envstack .env files)
+# look for $ROOT and $DEPLOY_ROOT (managed by envstack)
+# default root is $HOME/.local/envstack
 DEFAULT_ROOT = {
-    "darwin": f"{HOME}/Library/Application Support/siteconf",
-    "linux": f"{HOME}/.local/siteconf",
-    "windows": "C:\\ProgramData\\siteconf",
+    "darwin": f"{HOME}/Library/Application Support/envstack",
+    "linux": f"{HOME}/.local/envstack",
+    "windows": "C:\\ProgramData\\envstack",
 }.get(PLATFORM)
 ROOT = os.getenv("ROOT", os.getenv("DEPLOY_ROOT", DEFAULT_ROOT))
 
@@ -115,8 +115,8 @@ DEFAULT_PLATFORM_DIR = {
 PLATFORM_DIR = os.getenv("PLATFORM", DEFAULT_PLATFORM_DIR)
 
 # set python directory targets
-PYTHON_MAJOR_VERSION = os.getenv("PYVERSION", sys.version_info[0])
-PYTHON_DIR = os.getenv("PYTHON_DIR", f"python{PYTHON_MAJOR_VERSION}")
+PYVERSION = os.getenv("PYVERSION", sys.version_info[0])
+PYTHON_DIR = os.getenv("PYTHON_DIR", f"python{PYVERSION}")
 
 
 def sanitize_path(path):
