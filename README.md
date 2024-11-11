@@ -23,6 +23,15 @@ $ cd siteconf
 $ python setup.py install
 ```
 
+
+#### distman
+
+Alternate installation using [distman](https://github.com/rsgalloway/distman):
+
+```bash
+$ distman [-d]
+```
+
 ## Usage
 
 The `sitecustomize.py` module provides a convenient way to customize the Python environment by executing code before the interpreter begins executing the main script.
@@ -54,6 +63,19 @@ X:/tools/prod/lib/win32/python
 X:/tools/prod/lib/python3
 X:/tools/prod/lib/python
 ```
+
+### whichpy
+
+whichpy is the Python equivalent of which: it's a simple command line utility
+that tells you the location of Python modules and packages:
+
+```bash
+$ whichpy envstack
+/path/to/the/envstack/package
+```
+
+This can be useful when Python modules and packages are contextual and can live
+in different places depending on your cwd.
 
 ## Environment Variables
 
