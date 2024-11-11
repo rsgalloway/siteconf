@@ -1,0 +1,17 @@
+{
+    "author": "ryan@rsg.io",
+    "targets": {
+        "whichpy-bin": {
+            "source": "bin/whichpy",
+            "destination": "{DEPLOY_ROOT}/bin/whichpy"
+        },
+        "whichpy-lib": {
+            "source": "lib/whichpy.py",
+            "destination": "{DEPLOY_ROOT}/lib/python/whichpy.py"
+        },
+        "sitecustomize": {
+            "source": "lib/sitecustomize.py",
+            "destination": "{DEPLOY_ROOT}/lib/python/sitecustomize.py"
+        }
+    }
+}
